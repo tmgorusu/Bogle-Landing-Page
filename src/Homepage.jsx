@@ -68,8 +68,10 @@ const Homepage = () => {
                 <span className="hero-title-accent"> Modern Businesses</span>
               </h1>
               <p className={`hero-subtitle ${isVisible ? "animate-in" : ""}`}>
-                Reduce fees, eliminate chargebacks, and offer flexible payment
-                options that save you money while delighting your customers.
+                Add Pay by Bank and crypto payment options to your existing
+                setup. Reduce fees, eliminate chargebacks, and give customers
+                more flexible ways to pay while keeping all your current payment
+                methods.
               </p>
               <div className={`hero-actions ${isVisible ? "animate-in" : ""}`}>
                 <button
@@ -82,7 +84,6 @@ const Homepage = () => {
                 >
                   Get Early Access
                 </button>
-                <button className="btn-secondary">Watch Demo</button>
               </div>
               <div className={`hero-stats ${isVisible ? "animate-in" : ""}`}>
                 <div className="stat">
@@ -90,8 +91,8 @@ const Homepage = () => {
                   <span className="stat-label">Lower fees</span>
                 </div>
                 <div className="stat">
-                  <span className="stat-number">95%</span>
-                  <span className="stat-label">Fewer disputes</span>
+                  <span className="stat-number">$0</span>
+                  <span className="stat-label">Setup costs</span>
                 </div>
                 <div className="stat">
                   <span className="stat-number">5min</span>
@@ -129,14 +130,14 @@ const Homepage = () => {
                   <div className="cost-display after">
                     <div className="cost-label">With Bogle</div>
                     <div className="cost-amount savings">$580</div>
-                    <div className="cost-detail">ACH + crypto mix</div>
+                    <div className="cost-detail">Pay by Bank + crypto mix</div>
                   </div>
                 </div>
 
                 <div className="savings-summary">
                   <div className="savings-amount">
                     <span className="save-label">You save</span>
-                    <span className="save-value">$2,320</span>
+                    <span className="save-value">&nbsp;$2,320&nbsp;</span>
                     <span className="save-period">per month</span>
                   </div>
                 </div>
@@ -189,10 +190,10 @@ const Homepage = () => {
               <div className="payment-method-card featured">
                 <div className="featured-badge">Best Value</div>
                 <div className="method-icon-container">
-                  <div className="method-icon ach">ACH</div>
+                  <div className="method-icon ach">🏦</div>
                 </div>
-                <h3 className="method-title">ACH Payments</h3>
-                <p className="method-subtitle">Bank-to-bank transfers</p>
+                <h3 className="method-title">Pay by Bank</h3>
+                <p className="method-subtitle">Direct bank transfers</p>
                 <div className="method-features">
                   <div className="feature-item">
                     <span className="feature-icon">💰</span>
@@ -257,32 +258,79 @@ const Homepage = () => {
             <div className="section-header">
               <h2 className="section-title">Smart Discount Strategy</h2>
               <p className="section-subtitle">
-                Pass savings to customers while reducing your costs
+                Encourage customers to use payment methods that save you both
+                money.
               </p>
+              <div className="strategy-explanation">
+                <p className="explanation-text">
+                  <strong>Here’s how it works:</strong> You know that credit
+                  card fees are high. Bogle lets you offer customers a small
+                  discount if they choose to pay with lower-cost options like
+                  Pay by Bank or Crypto. This optional discount makes them feel
+                  smart for choosing a better deal, and it directly reduces your
+                  processing fees. You decide the discount, or if you want to
+                  offer one at all. It's a win-win: your customers save money,
+                  and you increase your profit on every sale.
+                </p>
+              </div>
             </div>
             <div className="discount-comparison">
               <div className="comparison-card">
                 <div className="comparison-header">
-                  <h3>ACH Discount Strategy</h3>
-                  <div className="discount-badge ach-discount">2% Discount</div>
+                  <h3>Credit Cards</h3>
+                  <div className="discount-badge cc-fee">
+                    Standard Processing
+                  </div>
                 </div>
                 <div className="comparison-breakdown">
                   <div className="breakdown-item">
-                    <span className="label">Customer pays:</span>
-                    <span className="value">$98.00 (2% discount)</span>
+                    <span className="label">Original price:</span>
+                    <span className="value">$100.00</span>
                   </div>
                   <div className="breakdown-item">
-                    <span className="label">Your processing fee:</span>
+                    <span className="label">Customer saves:</span>
+                    <span className="value">$0.00 (no discount)</span>
+                  </div>
+                  <div className="breakdown-item">
+                    <span className="label">Processing fees:</span>
+                    <span className="value">$3.20 (2.9% + 30¢)</span>
+                  </div>
+                  <div className="breakdown-item total">
+                    <span className="label">Your net revenue:</span>
+                    <span className="value">$96.80</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="comparison-card featured">
+                <div className="featured-badge">Best Value</div>
+                <div className="comparison-header">
+                  <h3>Pay by Bank with Optional Discount</h3>
+                  <div className="discount-badge ach-discount">
+                    Example: 2% Customer Discount
+                  </div>
+                </div>
+                <div className="comparison-breakdown">
+                  <div className="breakdown-item">
+                    <span className="label">Original price:</span>
+                    <span className="value">$100.00</span>
+                  </div>
+                  <div className="breakdown-item">
+                    <span className="label">Customer saves:</span>
+                    <span className="value">$2.00 (2% discount you offer)</span>
+                  </div>
+                  <div className="breakdown-item">
+                    <span className="label">Processing fees:</span>
                     <span className="value">$0.74 (0.5% + 25¢)</span>
                   </div>
                   <div className="breakdown-item total">
-                    <span className="label">Total cost to you:</span>
-                    <span className="value">$2.74</span>
+                    <span className="label">Your net revenue:</span>
+                    <span className="value">$97.26</span>
                   </div>
                   <div className="savings-highlight">
-                    <span className="savings-amount">$90.06 less</span>
+                    <span className="savings-amount">Customer saves $2.00</span>
                     <span className="savings-text">
-                      than credit card processing
+                      You earn $0.46 more vs credit cards
                     </span>
                   </div>
                 </div>
@@ -290,50 +338,35 @@ const Homepage = () => {
 
               <div className="comparison-card">
                 <div className="comparison-header">
-                  <h3>Crypto Discount Strategy</h3>
+                  <h3>Crypto with Optional Discount</h3>
                   <div className="discount-badge crypto-discount">
-                    1.75% Discount
+                    Example: 1.5% Customer Discount
                   </div>
                 </div>
                 <div className="comparison-breakdown">
                   <div className="breakdown-item">
-                    <span className="label">Customer pays:</span>
-                    <span className="value">$98.25 (1.75% discount)</span>
+                    <span className="label">Original price:</span>
+                    <span className="value">$100.00</span>
                   </div>
                   <div className="breakdown-item">
-                    <span className="label">Your processing fee:</span>
+                    <span className="label">Customer saves:</span>
+                    <span className="value">
+                      $1.50 (1.5% discount you offer)
+                    </span>
+                  </div>
+                  <div className="breakdown-item">
+                    <span className="label">Processing fees:</span>
                     <span className="value">$0.75 (0.75%)</span>
                   </div>
                   <div className="breakdown-item total">
-                    <span className="label">Total cost to you:</span>
-                    <span className="value">$2.50</span>
+                    <span className="label">Your net revenue:</span>
+                    <span className="value">$97.75</span>
                   </div>
                   <div className="savings-highlight">
-                    <span className="savings-amount">$90.30 less</span>
+                    <span className="savings-amount">Customer saves $1.50</span>
                     <span className="savings-text">
-                      than credit card processing
+                      You earn $0.95 more vs credit cards
                     </span>
-                  </div>
-                </div>
-              </div>
-
-              <div className="comparison-card baseline">
-                <div className="comparison-header">
-                  <h3>Credit Card Baseline</h3>
-                  <div className="discount-badge cc-fee">Standard Rate</div>
-                </div>
-                <div className="comparison-breakdown">
-                  <div className="breakdown-item">
-                    <span className="label">Customer pays:</span>
-                    <span className="value">$100.00 (full price)</span>
-                  </div>
-                  <div className="breakdown-item">
-                    <span className="label">Your processing fee:</span>
-                    <span className="value">$3.20 (2.9% + 30¢)</span>
-                  </div>
-                  <div className="breakdown-item total">
-                    <span className="label">Total cost to you:</span>
-                    <span className="value">$3.20</span>
                   </div>
                 </div>
               </div>
@@ -350,14 +383,18 @@ const Homepage = () => {
                 <span className="benefit-icon">🛡️</span>
                 <div className="benefit-content">
                   <h4>Prevent Chargebacks</h4>
-                  <p>ACH and crypto eliminate chargeback risk entirely</p>
+                  <p>
+                    Pay by Bank and crypto eliminate chargeback risk entirely
+                  </p>
                 </div>
               </div>
               <div className="benefit-item">
                 <span className="benefit-icon">😊</span>
                 <div className="benefit-content">
-                  <h4>Delight Customers</h4>
-                  <p>Customers save money while you reduce costs</p>
+                  <h4>Improve Customer Experience</h4>
+                  <p>
+                    Give customers more payment options and potential savings
+                  </p>
                 </div>
               </div>
             </div>
@@ -433,6 +470,36 @@ const Homepage = () => {
                   <li>Cancellation protection</li>
                 </ul>
               </div>
+
+              <div className="service-card">
+                <div className="service-icon">📱</div>
+                <h3 className="service-title">Mobile Payments</h3>
+                <p className="service-description">
+                  Accept payments on-the-go with our mobile-optimized payment
+                  links and QR codes
+                </p>
+                <ul className="service-features">
+                  <li>QR code payment generation</li>
+                  <li>Mobile-optimized checkout</li>
+                  <li>Text and email payment links</li>
+                  <li>Instant payment notifications</li>
+                </ul>
+              </div>
+
+              <div className="service-card">
+                <div className="service-icon">🔄</div>
+                <h3 className="service-title">Recurring Payments</h3>
+                <p className="service-description">
+                  Set up automatic recurring payments for subscriptions,
+                  memberships, and regular services
+                </p>
+                <ul className="service-features">
+                  <li>Flexible billing cycles</li>
+                  <li>Automatic retry logic</li>
+                  <li>Customer portal access</li>
+                  <li>Dunning management</li>
+                </ul>
+              </div>
             </div>
           </div>
         </section>
@@ -453,8 +520,9 @@ const Homepage = () => {
                 <div className="diff-content">
                   <h3>Complete Price Transparency</h3>
                   <p>
-                    No hidden fees, no surprises. You only pay when you process
-                    payments. Every fee is clearly outlined upfront.
+                    No hidden fees, no surprises, no upfront costs. You only pay
+                    when you process payments. Every fee is clearly outlined
+                    upfront.
                   </p>
                 </div>
               </div>
@@ -471,20 +539,22 @@ const Homepage = () => {
               <div className="differentiator-card">
                 <div className="diff-number">03</div>
                 <div className="diff-content">
-                  <h3>Customer-Focused Discounts</h3>
+                  <h3>Smart Payment Guidance</h3>
                   <p>
-                    Our discount strategies help both you and your customers
-                    save money while reducing payment risk.
+                    Intelligent recommendations guide customers to the most
+                    cost-effective payment methods through optional discounts
+                    you control.
                   </p>
                 </div>
               </div>
               <div className="differentiator-card">
                 <div className="diff-number">04</div>
                 <div className="diff-content">
-                  <h3>Intelligent Payment Routing</h3>
+                  <h3>Expand Your Customer Base</h3>
                   <p>
-                    Smart recommendations guide customers to the most
-                    cost-effective payment methods for both parties.
+                    More payment options mean more customers can complete
+                    purchases. Capture sales you're currently losing due to
+                    limited payment methods.
                   </p>
                 </div>
               </div>
@@ -533,9 +603,6 @@ const Homepage = () => {
                     </div>
                   </div>
                 </div>
-                <button className="btn-primary nonprofit-cta">
-                  Learn About Nonprofit Pricing
-                </button>
               </div>
               <div className="nonprofits-visual">
                 <div className="nonprofit-impact-card">
@@ -620,6 +687,30 @@ const Homepage = () => {
                   <span className="status-badge available">Available</span>
                 </div>
               </div>
+
+              <div className="integration-card">
+                <div className="integration-icon">📧</div>
+                <h3 className="integration-title">Email Marketing</h3>
+                <p className="integration-description">
+                  Connect with Mailchimp, Klaviyo, and other email platforms for
+                  automated customer communications
+                </p>
+                <div className="integration-status">
+                  <span className="status-badge coming-soon">Coming Soon</span>
+                </div>
+              </div>
+
+              <div className="integration-card">
+                <div className="integration-icon">💬</div>
+                <h3 className="integration-title">Customer Support</h3>
+                <p className="integration-description">
+                  Integrate with Zendesk, Intercom, and other support tools for
+                  seamless customer service
+                </p>
+                <div className="integration-status">
+                  <span className="status-badge coming-soon">Coming Soon</span>
+                </div>
+              </div>
             </div>
           </div>
         </section>
@@ -630,8 +721,8 @@ const Homepage = () => {
             <div className="waitlist-content">
               <h2 className="section-title">Join the Waitlist</h2>
               <p className="section-subtitle">
-                Be among the first to access Bogle and start saving on payment
-                processing
+                Be among the first to access Bogle and start expanding payment
+                options for your customers
               </p>
               <form className="waitlist-form" onSubmit={handleWaitlistSubmit}>
                 <div className="form-group">
@@ -667,8 +758,8 @@ const Homepage = () => {
             <div className="cta-content">
               <h2 className="cta-title">Ready to Transform Your Payments?</h2>
               <p className="cta-subtitle">
-                Join thousands of businesses already reducing costs and
-                improving customer satisfaction with Bogle.
+                Join our group of pioneering businesses already reducing costs
+                and expanding options for customers with Bogle.
               </p>
               <button
                 className="cta-button"
@@ -681,7 +772,7 @@ const Homepage = () => {
                 Get Early Access
               </button>
               <div className="cta-note">
-                No setup fees • Cancel anytime • 30-day free trial
+                No setup fees • No upfront costs • Cancel anytime
               </div>
             </div>
           </div>
