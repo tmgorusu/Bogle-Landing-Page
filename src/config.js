@@ -4,10 +4,10 @@ const config = {
   development: {
     apiUrl: 'http://localhost:3002'
   },
-  
+
   // Production API URL (replace with your Vercel URL after deployment)
   production: {
-    apiUrl: 'https://bogle-landing-page.vercel.app/'
+    apiUrl: 'https://bogle-landing-page-gjf24lbyy-tmgorusus-projects.vercel.app'
   }
 };
 
