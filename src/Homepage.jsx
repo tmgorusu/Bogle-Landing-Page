@@ -119,12 +119,13 @@ const Homepage = () => {
             <a href="#payment-options" className="nav-link">
               Payment Options
             </a>
-            <a href="#services" className="nav-link">
-              Services
-            </a>
             <a href="#discount-strategy" className="nav-link">
               Pricing
             </a>
+            <a href="#services" className="nav-link">
+              Services
+            </a>
+            
 
             <button
               className="nav-cta"
