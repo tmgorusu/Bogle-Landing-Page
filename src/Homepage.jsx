@@ -371,7 +371,7 @@ const Homepage = () => {
                     <li><strong>Account Verification:</strong> We verify the customer's bank account and available balance before processing</li>
                     <li><strong>Authorization Checks:</strong> Multiple authorization layers ensure legitimate transactions</li>
                     <li><strong>Credit Card Backup:</strong> For purchases over $1,000, we require a credit card on file as additional security</li>
-                    <li><strong>Risk Reduction:</strong> Significantly reduce chargeback risky</li>
+                    <li><strong>Risk Reduction:</strong> Significantly reduce chargeback risks</li>
                   </ul>
                 </div>
               </div>
