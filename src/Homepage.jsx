@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./Homepage.css";
 import Logo from "./assets/Logo.png";
+import { API_URL } from "./config";
 
 const Homepage = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -78,7 +79,7 @@ const Homepage = () => {
     setSubmitMessage("");
 
     try {
-      const response = await fetch('http://localhost:3002/api/waitlist', {
+      const response = await fetch(`${API_URL}/api/waitlist`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
