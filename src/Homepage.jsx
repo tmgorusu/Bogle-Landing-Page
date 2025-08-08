@@ -78,17 +78,34 @@ const Homepage = () => {
     setIsSubmitting(true);
     setSubmitMessage("");
 
-    // Simulate API call for now
-    setTimeout(() => {
-      setWaitlistSubmitted(true);
-      setEmail("");
-      setSubmitMessage("Thanks for joining our waitlist! We'll notify you when Bogle Pay launches.");
-      setTimeout(() => {
-        setWaitlistSubmitted(false);
-        setSubmitMessage("");
-      }, 5000);
+    try {
+      const response = await fetch(`${API_URL}/api/waitlist`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email: email.trim() }),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setWaitlistSubmitted(true);
+        setEmail("");
+        setSubmitMessage(data.message);
+        setTimeout(() => {
+          setWaitlistSubmitted(false);
+          setSubmitMessage("");
+        }, 5000);
+      } else {
+        setSubmitMessage(data.message || "Something went wrong. Please try again.");
+      }
+    } catch (error) {
+      console.error('Error submitting to waitlist:', error);
+      setSubmitMessage("Network error. Please check your connection and try again.");
+    } finally {
       setIsSubmitting(false);
-    }, 1000);
+    }
   };
 
   return (
