@@ -5,9 +5,9 @@ const config = {
     apiUrl: 'http://localhost:3002'
   },
 
-  // Production API URL - Vercel backend deployment
+  // Production API URL - Vercel functions
   production: {
-    apiUrl: 'https://bogle-landing-page-8n4sjry1a-tmgorusus-projects.vercel.app'
+    apiUrl: 'https://bogle-landing-page-29roage8x-tmgorusus-projects.vercel.app'
   }
 };
 
