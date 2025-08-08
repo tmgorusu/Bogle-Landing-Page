@@ -7,7 +7,7 @@ const config = {
 
   // Production API URL (replace with your Vercel URL after deployment)
   production: {
-    apiUrl: 'https://bogle-landing-page-gjf24lbyy-tmgorusus-projects.vercel.app'
+    apiUrl: 'https://your-site-name.netlify.app'
   }
 };
 
