@@ -145,7 +145,7 @@ EMAIL_API_KEY=your-mailgun-api-key
 
 ## 🚀 Production Deployment
 
-### Frontend (Vercel/Netlify)
+### Frontend (Vercel)
 1. Build the frontend: `npm run build`
 2. Deploy the `dist` folder
 3. Update backend CORS settings with production URL

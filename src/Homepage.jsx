@@ -1,16 +1,16 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./Homepage.css";
 import Logo from "./assets/Logo.png";
-import { API_URL } from "./config";
 
 const Homepage = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [email, setEmail] = useState("");
-  const [waitlistSubmitted, setWaitlistSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitMessage, setSubmitMessage] = useState("");
   const [visibleSections, setVisibleSections] = useState(new Set());
   const [showCookieBanner, setShowCookieBanner] = useState(true);
+  const [showScrollTop, setShowScrollTop] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const observerRef = useRef(null);
 
   useEffect(() => {
@@ -31,6 +31,28 @@ const Homepage = () => {
     // Observe all sections
     const sections = document.querySelectorAll('[data-animate]');
     sections.forEach(section => observerRef.current.observe(section));
+
+    // Handle scroll for scroll-to-top button
+    const handleScroll = () => {
+      setShowScrollTop(window.scrollY > 300);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+          setMobileMenuOpen(false); // Close mobile menu if open
+        }
+      });
+    });
 
     // Animate counters when hero becomes visible
     setTimeout(() => {
@@ -64,6 +86,7 @@ const Homepage = () => {
       if (observerRef.current) {
         observerRef.current.disconnect();
       }
+      window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
@@ -78,11 +101,25 @@ const Homepage = () => {
     setIsSubmitting(true);
     setSubmitMessage("");
 
-    // Simulate network connectivity issues
-    setTimeout(() => {
-      setSubmitMessage("Network connectivity issues. Please try again later.");
+    try {
+      // Here you would integrate with your actual waitlist API
+      // For now, we'll simulate a successful submission
+      setTimeout(() => {
+        setSubmitMessage("Thanks for joining! We'll be in touch soon.");
+        setEmail("");
+        setIsSubmitting(false);
+      }, 1000);
+    } catch (error) {
+      setSubmitMessage("Something went wrong. Please try again.");
       setIsSubmitting(false);
-    }, 1500);
+    }
+  };
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
   };
 
   return (
@@ -93,7 +130,9 @@ const Homepage = () => {
           <div className="nav-logo">
             <img src={Logo} alt="Bogle" />
           </div>
-          <div className="nav-links">
+          
+          {/* Desktop Navigation */}
+          <div className="nav-links desktop-nav">
             <a href="#payment-options" className="nav-link">
               Payment Options
             </a>
@@ -103,8 +142,9 @@ const Homepage = () => {
             <a href="#services" className="nav-link">
               Services
             </a>
-            
-
+            <a href="#about" className="nav-link">
+              About
+            </a>
             <button
               className="nav-cta"
               onClick={() =>
@@ -112,6 +152,48 @@ const Homepage = () => {
                   .getElementById("waitlist")
                   .scrollIntoView({ behavior: "smooth" })
               }
+            >
+              Join Waitlist
+            </button>
+          </div>
+
+          {/* Mobile Menu Button */}
+          <button 
+            className="mobile-menu-btn"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Toggle menu"
+          >
+            <span className={`hamburger ${mobileMenuOpen ? 'open' : ''}`}>
+              <span></span>
+              <span></span>
+              <span></span>
+            </span>
+          </button>
+        </div>
+
+        {/* Mobile Navigation */}
+        <div className={`mobile-nav ${mobileMenuOpen ? 'open' : ''}`}>
+          <div className="mobile-nav-links">
+            <a href="#payment-options" className="mobile-nav-link">
+              Payment Options
+            </a>
+            <a href="#discount-strategy" className="mobile-nav-link">
+              Pricing
+            </a>
+            <a href="#services" className="mobile-nav-link">
+              Services
+            </a>
+            <a href="#about" className="mobile-nav-link">
+              About
+            </a>
+            <button
+              className="mobile-nav-cta"
+              onClick={() => {
+                document
+                  .getElementById("waitlist")
+                  .scrollIntoView({ behavior: "smooth" });
+                setMobileMenuOpen(false);
+              }}
             >
               Join Waitlist
             </button>
@@ -201,7 +283,7 @@ const Homepage = () => {
                   <div className="cost-display after animate-cost-after">
                     <div className="cost-label">With Bogle</div>
                     <div className="cost-amount savings pulse-savings">$580</div>
-                    <div className="cost-detail">ACH + crypto mix</div>
+                    <div className="cost-detail">ACH</div>
                   </div>
                 </div>
 
@@ -234,7 +316,7 @@ const Homepage = () => {
                 </div>
                 <div className="method-header">
                   <h3 className="method-title">Credit Cards</h3>
-                  <p className="method-subtitle">Powered by Stripe</p>
+                  <p className="method-subtitle">Traditional processing</p>
                 </div>
                 <div className="method-rate">
                   <span className="rate-number">2.9%</span>
@@ -244,7 +326,7 @@ const Homepage = () => {
                   <div className="method-features">
                     <div className="feature-item">
                       <span className="feature-icon">⚡</span>
-                      <span>Industry-leading processing with Stripe</span>
+                      <span>Industry-leading processing technology</span>
                     </div>
                     <div className="feature-item">
                       <span className="feature-icon">🔗</span>
@@ -387,7 +469,7 @@ const Homepage = () => {
                   <strong>Here’s how it works:</strong> You know that credit
                   card fees are high. Bogle lets you offer customers a small
                   discount if they choose to pay with lower-cost options like
-                  ACH or Crypto. This optional discount makes them feel
+                  ACH. This optional discount makes them feel
                   smart for choosing a better deal, and it directly reduces your
                   processing fees. You decide the discount, or if you want to
                   offer one at all. It's a win-win: your customers save money,
@@ -471,7 +553,7 @@ const Homepage = () => {
                 </div>
               </div>
 
-              <div className="comparison-card animate-comparison-card" data-delay="400">
+              {/* <div className="comparison-card animate-comparison-card" data-delay="400">
                 <div className="comparison-header">
                   <h3>Crypto with Optional Discount</h3>
                   <div className="discount-badge crypto-discount">
@@ -508,7 +590,7 @@ const Homepage = () => {
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> */}
             </div>
             {/* 
             <div className="discount-benefits">
@@ -524,7 +606,7 @@ const Homepage = () => {
                 <div className="benefit-content">
                   <h4>Prevent Chargebacks</h4>
                   <p>
-                    ACH and crypto eliminate chargeback risk entirely
+                    ACH eliminates chargeback risk entirely
                   </p>
                 </div>
               </div>
@@ -542,7 +624,7 @@ const Homepage = () => {
         </section>
 
         {/* What We Do Differently Section */}
-        <section className="differentiators">
+        <section className="differentiators" id="about">
           <div className="differentiators-container">
             <div className="section-header">
               <h2 className="section-title">What Makes Bogle Different</h2>
@@ -576,7 +658,7 @@ const Homepage = () => {
                 <div className="diff-content">
                   <h3>Versatile Payments in One Place</h3>
                   <p>
-                    Accept ACH, credit cards, and crypto with one platform, giving merchants and customers flexible options.
+                    Accept ACH and credit cards with one platform, giving merchants and customers flexible options.
                   </p>
                 </div>
               </div>
@@ -716,8 +798,6 @@ const Homepage = () => {
                         <span className="spinner"></span>
                         Joining...
                       </>
-                    ) : waitlistSubmitted ? (
-                      "✓ Added!"
                     ) : (
                       "Join Waitlist"
                     )}
@@ -729,9 +809,9 @@ const Homepage = () => {
               </form>
 
               {submitMessage && (
-                <div className={`message ${waitlistSubmitted ? 'success-message' : 'error-message'}`}>
+                <div className={`message ${submitMessage.includes('Thanks') ? 'success-message' : 'error-message'}`}>
                   <span className="message-icon">
-                    {waitlistSubmitted ? '🎉' : '⚠️'}
+                    {submitMessage.includes('Thanks') ? '🎉' : '⚠️'}
                   </span>
                   <span>{submitMessage}</span>
                 </div>
@@ -797,15 +877,23 @@ const Homepage = () => {
                 >
                   Accept All
                 </button>
-                <button
-                  className="cookie-decline"
-                  onClick={() => setShowCookieBanner(false)}
-                >
-                  Decline
-                </button>
+
               </div>
             </div>
           </div>
+        )}
+
+        {/* Scroll to Top Button */}
+        {showScrollTop && (
+          <button 
+            className="scroll-to-top"
+            onClick={scrollToTop}
+            aria-label="Scroll to top"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="m18 15-6-6-6 6"/>
+            </svg>
+          </button>
         )}
       </div>
     </div>

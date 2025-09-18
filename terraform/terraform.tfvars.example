@@ -1,0 +1,11 @@
+# Copy this file to terraform.tfvars and update the values
+
+aws_region = "us-east-1"
+project_name = "bogle-waitlist"
+environment = "dev"
+
+# Email address that will send confirmation emails (must be verified in SES)
+email_from_address = "general@boglepay.com"
+
+# Frontend URL for CORS (update for production)
+frontend_url = "http://localhost:5173"
