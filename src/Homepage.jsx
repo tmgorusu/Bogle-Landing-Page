@@ -21,33 +21,33 @@ const Homepage = () => {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            setVisibleSections(prev => new Set([...prev, entry.target.id]));
+            setVisibleSections((prev) => new Set([...prev, entry.target.id]));
           }
         });
       },
-      { threshold: 0.1, rootMargin: '50px' }
+      { threshold: 0.1, rootMargin: "50px" }
     );
 
     // Observe all sections
-    const sections = document.querySelectorAll('[data-animate]');
-    sections.forEach(section => observerRef.current.observe(section));
+    const sections = document.querySelectorAll("[data-animate]");
+    sections.forEach((section) => observerRef.current.observe(section));
 
     // Handle scroll for scroll-to-top button
     const handleScroll = () => {
       setShowScrollTop(window.scrollY > 300);
     };
 
-    window.addEventListener('scroll', handleScroll);
-    
+    window.addEventListener("scroll", handleScroll);
+
     // Smooth scrolling for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
+    document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+      anchor.addEventListener("click", function (e) {
         e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
+        const target = document.querySelector(this.getAttribute("href"));
         if (target) {
           target.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
+            behavior: "smooth",
+            block: "start",
           });
           setMobileMenuOpen(false); // Close mobile menu if open
         }
@@ -56,12 +56,12 @@ const Homepage = () => {
 
     // Animate counters when hero becomes visible
     setTimeout(() => {
-      const counters = document.querySelectorAll('.animated-counter');
-      counters.forEach(counter => {
-        const target = parseInt(counter.getAttribute('data-target'));
-        const isPercentage = counter.textContent.includes('%');
-        const isDollar = counter.textContent.includes('$');
-        const isTime = counter.textContent.includes('min');
+      const counters = document.querySelectorAll(".animated-counter");
+      counters.forEach((counter) => {
+        const target = parseInt(counter.getAttribute("data-target"));
+        const isPercentage = counter.textContent.includes("%");
+        const isDollar = counter.textContent.includes("$");
+        const isTime = counter.textContent.includes("min");
 
         let current = 0;
         const increment = target / 50;
@@ -73,9 +73,9 @@ const Homepage = () => {
           }
 
           let displayValue = Math.floor(current);
-          if (isPercentage) displayValue += '%';
-          else if (isDollar) displayValue = '$' + displayValue;
-          else if (isTime) displayValue += 'min';
+          if (isPercentage) displayValue += "%";
+          else if (isDollar) displayValue = "$" + displayValue;
+          else if (isTime) displayValue += "min";
 
           counter.textContent = displayValue;
         }, 40);
@@ -86,7 +86,7 @@ const Homepage = () => {
       if (observerRef.current) {
         observerRef.current.disconnect();
       }
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
@@ -118,7 +118,7 @@ const Homepage = () => {
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
-      behavior: 'smooth'
+      behavior: "smooth",
     });
   };
 
@@ -130,7 +130,7 @@ const Homepage = () => {
           <div className="nav-logo">
             <img src={Logo} alt="Bogle" />
           </div>
-          
+
           {/* Desktop Navigation */}
           <div className="nav-links desktop-nav">
             <a href="#payment-options" className="nav-link">
@@ -158,12 +158,12 @@ const Homepage = () => {
           </div>
 
           {/* Mobile Menu Button */}
-          <button 
+          <button
             className="mobile-menu-btn"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle menu"
           >
-            <span className={`hamburger ${mobileMenuOpen ? 'open' : ''}`}>
+            <span className={`hamburger ${mobileMenuOpen ? "open" : ""}`}>
               <span></span>
               <span></span>
               <span></span>
@@ -172,7 +172,7 @@ const Homepage = () => {
         </div>
 
         {/* Mobile Navigation */}
-        <div className={`mobile-nav ${mobileMenuOpen ? 'open' : ''}`}>
+        <div className={`mobile-nav ${mobileMenuOpen ? "open" : ""}`}>
           <div className="mobile-nav-links">
             <a href="#payment-options" className="mobile-nav-link">
               Payment Options
@@ -230,30 +230,58 @@ const Homepage = () => {
               </div>
               <div className={`hero-stats ${isVisible ? "animate-in" : ""}`}>
                 <div className="stat">
-                  <span className="stat-number animated-counter" data-target="80">0%</span>
+                  <span
+                    className="stat-number animated-counter"
+                    data-target="80"
+                  >
+                    0%
+                  </span>
                   <span className="stat-label">Lower fees</span>
                   <div className="stat-progress">
-                    <div className="progress-bar" style={{ width: '80%' }}></div>
+                    <div
+                      className="progress-bar"
+                      style={{ width: "80%" }}
+                    ></div>
                   </div>
                 </div>
                 <div className="stat">
-                  <span className="stat-number animated-counter" data-target="0">$0</span>
+                  <span
+                    className="stat-number animated-counter"
+                    data-target="0"
+                  >
+                    $0
+                  </span>
                   <span className="stat-label">Setup costs</span>
                   <div className="stat-progress">
-                    <div className="progress-bar" style={{ width: '100%' }}></div>
+                    <div
+                      className="progress-bar"
+                      style={{ width: "100%" }}
+                    ></div>
                   </div>
                 </div>
                 <div className="stat">
-                  <span className="stat-number animated-counter" data-target="5">0min</span>
+                  <span
+                    className="stat-number animated-counter"
+                    data-target="5"
+                  >
+                    0min
+                  </span>
                   <span className="stat-label">Setup time</span>
                   <div className="stat-progress">
-                    <div className="progress-bar" style={{ width: '95%' }}></div>
+                    <div
+                      className="progress-bar"
+                      style={{ width: "95%" }}
+                    ></div>
                   </div>
                 </div>
               </div>
             </div>
             <div className="hero-visual">
-              <div className={`savings-showcase ${isVisible ? 'animate-showcase' : ''}`}>
+              <div
+                className={`savings-showcase ${
+                  isVisible ? "animate-showcase" : ""
+                }`}
+              >
                 <div className="savings-header">
                   <span className="showcase-label">
                     Monthly Payment Processing
@@ -282,7 +310,9 @@ const Homepage = () => {
 
                   <div className="cost-display after animate-cost-after">
                     <div className="cost-label">With Bogle</div>
-                    <div className="cost-amount savings pulse-savings">$580</div>
+                    <div className="cost-amount savings pulse-savings">
+                      $580
+                    </div>
                     <div className="cost-detail">ACH</div>
                   </div>
                 </div>
@@ -290,7 +320,9 @@ const Homepage = () => {
                 <div className="savings-summary animate-summary">
                   <div className="savings-amount">
                     <span className="save-label">You save</span>
-                    <span className="save-value glow-text">&nbsp;$2,320&nbsp;</span>
+                    <span className="save-value glow-text">
+                      &nbsp;$2,320&nbsp;
+                    </span>
                     <span className="save-period">per month</span>
                   </div>
                 </div>
@@ -302,14 +334,24 @@ const Homepage = () => {
         {/* Payment Options Section */}
         <section className="payment-options" id="payment-options" data-animate>
           <div className="payment-options-container">
-            <div className={`section-header ${visibleSections.has('payment-options') ? 'animate-slide-up' : ''}`}>
+            <div
+              className={`section-header ${
+                visibleSections.has("payment-options") ? "animate-slide-up" : ""
+              }`}
+            >
               <h2 className="section-title">Choose Your Payment Method</h2>
               <p className="section-subtitle">
                 Multiple options to fit your business needs and customer
                 preferences
               </p>
             </div>
-            <div className={`payment-methods-grid ${visibleSections.has('payment-options') ? 'animate-stagger-cards' : ''}`}>
+            <div
+              className={`payment-methods-grid ${
+                visibleSections.has("payment-options")
+                  ? "animate-stagger-cards"
+                  : ""
+              }`}
+            >
               <div className="payment-method-card animate-card" data-delay="0">
                 <div className="method-icon-container">
                   <div className="method-icon credit-card pulse-icon">💳</div>
@@ -344,7 +386,10 @@ const Homepage = () => {
                 </div>
               </div>
 
-              <div className="payment-method-card featured animate-card" data-delay="200">
+              <div
+                className="payment-method-card featured animate-card"
+                data-delay="200"
+              >
                 <div className="featured-badge bounce-badge">Best Value</div>
                 <div className="method-icon-container">
                   <div className="method-icon ach pulse-icon">🏦</div>
@@ -373,7 +418,9 @@ const Homepage = () => {
                     </div>
                     <div className="feature-item">
                       <span className="feature-icon">🔄</span>
-                      <span>Lower bounce rates than credit card chargebacks</span>
+                      <span>
+                        Lower bounce rates than credit card chargebacks
+                      </span>
                     </div>
                   </div>
                   <div className="method-extras">
@@ -382,7 +429,10 @@ const Homepage = () => {
                 </div>
               </div>
 
-              <div className="payment-method-card animate-card" data-delay="400">
+              <div
+                className="payment-method-card animate-card"
+                data-delay="400"
+              >
                 <div className="method-icon-container">
                   <div className="method-icon crypto pulse-icon">₿</div>
                 </div>
@@ -391,8 +441,8 @@ const Homepage = () => {
                   <p className="method-subtitle">Digital payments</p>
                 </div>
                 <div className="method-rate">
-                  <span className="rate-number">0.75%</span>
-                  <span className="rate-detail">No fixed fee</span>
+                  <span className="rate-number">1%</span>
+                  <span className="rate-detail">+ 25¢ per transaction</span>
                 </div>
                 <div className="method-content">
                   <div className="method-features">
@@ -425,12 +475,29 @@ const Homepage = () => {
                   <h4>Why ACH </h4>
                 </div>
                 <div className="risk-content">
-                  <p>ACH includes comprehensive verification and authorization processes that significantly reduce chargeback risk:</p>
+                  <p>
+                    ACH includes comprehensive verification and authorization
+                    processes that significantly reduce chargeback risk:
+                  </p>
                   <ul className="risk-features">
-                    <li><strong>Account Verification:</strong> We verify the customer's bank account and available balance before processing</li>
-                    <li><strong>Authorization Checks:</strong> Multiple authorization layers ensure legitimate transactions</li>
-                    <li><strong>Credit Card Backup:</strong> For purchases over $1,000, we require a credit card on file as additional security</li>
-                    <li><strong>Risk Reduction:</strong> Significantly reduce chargeback risks</li>
+                    <li>
+                      <strong>Account Verification:</strong> We verify the
+                      customer's bank account and available balance before
+                      processing
+                    </li>
+                    <li>
+                      <strong>Authorization Checks:</strong> Multiple
+                      authorization layers ensure legitimate transactions
+                    </li>
+                    <li>
+                      <strong>Credit Card Backup:</strong> For purchases over
+                      $1,000, we require a credit card on file as additional
+                      security
+                    </li>
+                    <li>
+                      <strong>Risk Reduction:</strong> Significantly reduce
+                      chargeback risks
+                    </li>
                   </ul>
                 </div>
               </div>
@@ -440,12 +507,28 @@ const Homepage = () => {
                   <h4>Why Crypto</h4>
                 </div>
                 <div className="risk-content">
-                  <p>Cryptocurrency payments provide the highest level of chargeback protection available:</p>
+                  <p>
+                    Cryptocurrency payments provide the highest level of
+                    chargeback protection available:
+                  </p>
                   <ul className="risk-features">
-                    <li><strong>Irreversible Transactions:</strong> Once confirmed on the blockchain, crypto payments cannot be reversed</li>
-                    <li><strong>No Chargeback Mechanism:</strong> Unlike credit cards, there's no way for customers to dispute completed crypto transactions</li>
-                    <li><strong>Instant Finality:</strong> Payments are final upon confirmation, eliminating fraud risk entirely</li>
-                    <li><strong>Complete Protection:</strong> This is the only payment method that completely eliminates chargeback fraud</li>
+                    <li>
+                      <strong>Irreversible Transactions:</strong> Once confirmed
+                      on the blockchain, crypto payments cannot be reversed
+                    </li>
+                    <li>
+                      <strong>No Chargeback Mechanism:</strong> Unlike credit
+                      cards, there's no way for customers to dispute completed
+                      crypto transactions
+                    </li>
+                    <li>
+                      <strong>Instant Finality:</strong> Payments are final upon
+                      confirmation, eliminating fraud risk entirely
+                    </li>
+                    <li>
+                      <strong>Complete Protection:</strong> This is the only
+                      payment method that completely eliminates chargeback fraud
+                    </li>
                   </ul>
                 </div>
               </div>
@@ -454,14 +537,29 @@ const Homepage = () => {
         </section>
 
         {/* Discount Strategy Section */}
-        <section className="discount-strategy" id="discount-strategy" data-animate>
+        <section
+          className="discount-strategy"
+          id="discount-strategy"
+          data-animate
+        >
           <div className="discount-strategy-container">
-            <div className={`section-header ${visibleSections.has('discount-strategy') ? 'animate-slide-up' : ''}`}>
-              <h2 className="section-title">How Smart Discounts Work (and Save Everyone Money)</h2>
+            <div
+              className={`section-header ${
+                visibleSections.has("discount-strategy")
+                  ? "animate-slide-up"
+                  : ""
+              }`}
+            >
+              <h2 className="section-title">
+                How Smart Discounts Work (and Save Everyone Money)
+              </h2>
 
               <div className="optional-disclaimer">
                 <p className="disclaimer-text">
-                  <strong>Your business chooses whether and how much to offer—completely optional and customizable</strong>
+                  <strong>
+                    Your business chooses whether and how much to
+                    offer—completely optional and customizable
+                  </strong>
                 </p>
               </div>
               <div className="strategy-explanation">
@@ -469,16 +567,25 @@ const Homepage = () => {
                   <strong>Here’s how it works:</strong> You know that credit
                   card fees are high. Bogle lets you offer customers a small
                   discount if they choose to pay with lower-cost options like
-                  ACH. This optional discount makes them feel
-                  smart for choosing a better deal, and it directly reduces your
-                  processing fees. You decide the discount, or if you want to
-                  offer one at all. It's a win-win: your customers save money,
-                  and you increase your profit on every sale.
+                  ACH. This optional discount makes them feel smart for choosing
+                  a better deal, and it directly reduces your processing fees.
+                  You decide the discount, or if you want to offer one at all.
+                  It's a win-win: your customers save money, and you increase
+                  your profit on every sale.
                 </p>
               </div>
             </div>
-            <div className={`discount-comparison ${visibleSections.has('discount-strategy') ? 'animate-comparison-cards' : ''}`}>
-              <div className="comparison-card animate-comparison-card" data-delay="0">
+            <div
+              className={`discount-comparison ${
+                visibleSections.has("discount-strategy")
+                  ? "animate-comparison-cards"
+                  : ""
+              }`}
+            >
+              <div
+                className="comparison-card animate-comparison-card"
+                data-delay="0"
+              >
                 <div className="comparison-header">
                   <h3>Credit Cards</h3>
                   <div className="discount-badge cc-fee">
@@ -504,7 +611,9 @@ const Homepage = () => {
                   </div>
                   <div className="combined-savings">
                     <div className="total-impact">
-                      <span className="impact-label">Total Combined Savings:</span>
+                      <span className="impact-label">
+                        Total Combined Savings:
+                      </span>
                       <span className="impact-value">$0.00</span>
                     </div>
                     <div className="impact-breakdown">
@@ -515,7 +624,10 @@ const Homepage = () => {
                 </div>
               </div>
 
-              <div className="comparison-card featured animate-comparison-card" data-delay="200">
+              <div
+                className="comparison-card featured animate-comparison-card"
+                data-delay="200"
+              >
                 <div className="featured-badge shimmer-badge">Best Value</div>
                 <div className="comparison-header">
                   <h3>ACH with Optional Discount</h3>
@@ -530,7 +642,9 @@ const Homepage = () => {
                   </div>
                   <div className="breakdown-item">
                     <span className="label">Savings for your customers:</span>
-                    <span className="value">$2.00 (2% discount you choose to offer)</span>
+                    <span className="value">
+                      $2.00 (2% discount you choose to offer)
+                    </span>
                   </div>
                   <div className="breakdown-item">
                     <span className="label">Processing cost to you:</span>
@@ -542,12 +656,18 @@ const Homepage = () => {
                   </div>
                   <div className="combined-savings">
                     <div className="total-impact">
-                      <span className="impact-label">Total Combined Savings:</span>
+                      <span className="impact-label">
+                        Total Combined Savings:
+                      </span>
                       <span className="impact-value">$2.46</span>
                     </div>
                     <div className="impact-breakdown">
-                      <span className="business-impact">Savings for your business: $0.46 vs credit cards</span>
-                      <span className="customer-impact">Savings for your customers: $2.00</span>
+                      <span className="business-impact">
+                        Savings for your business: $0.46 vs credit cards
+                      </span>
+                      <span className="customer-impact">
+                        Savings for your customers: $2.00
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -629,7 +749,8 @@ const Homepage = () => {
             <div className="section-header">
               <h2 className="section-title">What Makes Bogle Different</h2>
               <p className="section-subtitle">
-                Bogle gives small businesses the tools to offer payment choices that reduce fees—for themselves and their customers
+                Bogle gives small businesses the tools to offer payment choices
+                that reduce fees—for themselves and their customers
               </p>
             </div>
             <div className="differentiators-grid">
@@ -649,7 +770,8 @@ const Homepage = () => {
                 <div className="diff-content">
                   <h3>Frictionless ACH Experience</h3>
                   <p>
-                    Seamless bank payments as easy as credit cards—no clunky account number entry or long verification delays.
+                    Seamless bank payments as easy as credit cards—no clunky
+                    account number entry or long verification delays.
                   </p>
                 </div>
               </div>
@@ -658,7 +780,8 @@ const Homepage = () => {
                 <div className="diff-content">
                   <h3>Versatile Payments in One Place</h3>
                   <p>
-                    Accept ACH and credit cards with one platform, giving merchants and customers flexible options.
+                    Accept ACH and credit cards with one platform, giving
+                    merchants and customers flexible options.
                   </p>
                 </div>
               </div>
@@ -667,7 +790,9 @@ const Homepage = () => {
                 <div className="diff-content">
                   <h3>Built for Business Growth</h3>
                   <p>
-                    Powerful plug-and-play integrations (Shopify, QuickBooks), real-time fraud protection, and growth tools like cash-back incentives drive adoption and retention.
+                    Powerful plug-and-play integrations (Shopify, QuickBooks),
+                    real-time fraud protection, and growth tools like cash-back
+                    incentives drive adoption and retention.
                   </p>
                 </div>
               </div>
@@ -675,22 +800,32 @@ const Homepage = () => {
           </div>
         </section>
 
-
         {/* Combined Services and Integrations Section */}
         <section className="services" id="services" data-animate>
           <div className="services-container">
-            <div className={`section-header ${visibleSections.has('services') ? 'animate-slide-up' : ''}`}>
-              <h2 className="section-title">Complete Payment Solutions & Integrations</h2>
+            <div
+              className={`section-header ${
+                visibleSections.has("services") ? "animate-slide-up" : ""
+              }`}
+            >
+              <h2 className="section-title">
+                Complete Payment Solutions & Integrations
+              </h2>
               <p className="section-subtitle">
-                Everything you need to streamline payments and connect with your favorite tools
+                Everything you need to streamline payments and connect with your
+                favorite tools
               </p>
             </div>
-            <div className={`services-grid ${visibleSections.has('services') ? 'animate-grid-items' : ''}`}>
+            <div
+              className={`services-grid ${
+                visibleSections.has("services") ? "animate-grid-items" : ""
+              }`}
+            >
               <div className="service-card animate-service-card" data-delay="0">
-
                 <h3 className="service-title">Smart Invoicing</h3>
                 <p className="service-description">
-                  Send beautiful digital invoices with multiple payment options and automatic reminders
+                  Send beautiful digital invoices with multiple payment options
+                  and automatic reminders
                 </p>
                 <ul className="service-features">
                   <li>Customizable templates</li>
@@ -699,11 +834,14 @@ const Homepage = () => {
                 </ul>
               </div>
 
-              <div className="service-card animate-service-card" data-delay="100">
-
+              <div
+                className="service-card animate-service-card"
+                data-delay="100"
+              >
                 <h3 className="service-title">Shopify Integration</h3>
                 <p className="service-description">
-                  One-click integration with native checkout and automatic order sync
+                  One-click integration with native checkout and automatic order
+                  sync
                 </p>
                 <ul className="service-features">
                   <li>Native checkout experience</li>
@@ -712,11 +850,14 @@ const Homepage = () => {
                 </ul>
               </div>
 
-              <div className="service-card animate-service-card" data-delay="200">
-
+              <div
+                className="service-card animate-service-card"
+                data-delay="200"
+              >
                 <h3 className="service-title">Website Integration</h3>
                 <p className="service-description">
-                  Developer-friendly API with customizable widgets and comprehensive docs
+                  Developer-friendly API with customizable widgets and
+                  comprehensive docs
                 </p>
                 <ul className="service-features">
                   <li>RESTful API and SDKs</li>
@@ -725,11 +866,14 @@ const Homepage = () => {
                 </ul>
               </div>
 
-              <div className="service-card animate-service-card" data-delay="300">
-
+              <div
+                className="service-card animate-service-card"
+                data-delay="300"
+              >
                 <h3 className="service-title">QuickBooks Integration</h3>
                 <p className="service-description">
-                  Automatic transaction sync and simplified accounting management
+                  Automatic transaction sync and simplified accounting
+                  management
                 </p>
                 <ul className="service-features">
                   <li>Automatic transaction sync</li>
@@ -738,11 +882,14 @@ const Homepage = () => {
                 </ul>
               </div>
 
-              <div className="service-card animate-service-card" data-delay="400">
-
+              <div
+                className="service-card animate-service-card"
+                data-delay="400"
+              >
                 <h3 className="service-title">Mobile & QR Payments</h3>
                 <p className="service-description">
-                  Accept payments on-the-go with QR codes and mobile-optimized links
+                  Accept payments on-the-go with QR codes and mobile-optimized
+                  links
                 </p>
                 <ul className="service-features">
                   <li>QR code generation</li>
@@ -751,11 +898,14 @@ const Homepage = () => {
                 </ul>
               </div>
 
-              <div className="service-card animate-service-card" data-delay="500">
-
+              <div
+                className="service-card animate-service-card"
+                data-delay="500"
+              >
                 <h3 className="service-title">Analytics & Reporting</h3>
                 <p className="service-description">
-                  Track customer behavior, payment patterns, and detailed transaction analytics
+                  Track customer behavior, payment patterns, and detailed
+                  transaction analytics
                 </p>
                 <ul className="service-features">
                   <li>Customer spend patterns</li>
@@ -767,14 +917,16 @@ const Homepage = () => {
           </div>
         </section>
 
-
         {/* Combined CTA and Waitlist Section */}
         <section className="cta-waitlist" id="waitlist">
           <div className="cta-waitlist-container">
             <div className="cta-waitlist-content">
-              <h2 className="section-title">Ready to Transform Your Business?</h2>
+              <h2 className="section-title">
+                Ready to Transform Your Business?
+              </h2>
               <p className="section-subtitle">
-                Join our first group of businesses reducing costs and expanding payment options for customers with Bogle.
+                Join our first group of businesses reducing costs and expanding
+                payment options for customers with Bogle.
               </p>
 
               <form className="waitlist-form" onSubmit={handleWaitlistSubmit}>
@@ -790,7 +942,9 @@ const Homepage = () => {
                   />
                   <button
                     type="submit"
-                    className={`waitlist-button ${isSubmitting ? 'loading' : ''}`}
+                    className={`waitlist-button ${
+                      isSubmitting ? "loading" : ""
+                    }`}
                     disabled={isSubmitting}
                   >
                     {isSubmitting ? (
@@ -809,9 +963,15 @@ const Homepage = () => {
               </form>
 
               {submitMessage && (
-                <div className={`message ${submitMessage.includes('Thanks') ? 'success-message' : 'error-message'}`}>
+                <div
+                  className={`message ${
+                    submitMessage.includes("Thanks")
+                      ? "success-message"
+                      : "error-message"
+                  }`}
+                >
                   <span className="message-icon">
-                    {submitMessage.includes('Thanks') ? '🎉' : '⚠️'}
+                    {submitMessage.includes("Thanks") ? "🎉" : "⚠️"}
                   </span>
                   <span>{submitMessage}</span>
                 </div>
@@ -865,9 +1025,9 @@ const Homepage = () => {
           <div className="cookie-banner">
             <div className="cookie-content">
               <p>
-                We use cookies to enhance your experience and analyze site usage.
-                By continuing to use our site, you agree to our{' '}
-                <a href="/privacy-policy">Privacy Policy</a> and{' '}
+                We use cookies to enhance your experience and analyze site
+                usage. By continuing to use our site, you agree to our{" "}
+                <a href="/privacy-policy">Privacy Policy</a> and{" "}
                 <a href="/terms-of-service">Terms of Service</a>.
               </p>
               <div className="cookie-actions">
@@ -877,7 +1037,6 @@ const Homepage = () => {
                 >
                   Accept All
                 </button>
-
               </div>
             </div>
           </div>
@@ -885,13 +1044,20 @@ const Homepage = () => {
 
         {/* Scroll to Top Button */}
         {showScrollTop && (
-          <button 
+          <button
             className="scroll-to-top"
             onClick={scrollToTop}
             aria-label="Scroll to top"
           >
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="m18 15-6-6-6 6"/>
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+            >
+              <path d="m18 15-6-6-6 6" />
             </svg>
           </button>
         )}
