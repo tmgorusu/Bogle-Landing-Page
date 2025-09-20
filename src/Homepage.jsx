@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./Homepage.css";
 import Logo from "./assets/Logo.png";
+import { joinWaitlist, validateEmail } from "./api/waitlist.js";
 
 const Homepage = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -93,8 +94,14 @@ const Homepage = () => {
   const handleWaitlistSubmit = async (e) => {
     e.preventDefault();
 
+    // Validate required fields
     if (!email.trim()) {
       setSubmitMessage("Please enter your email address");
+      return;
+    }
+
+    if (!validateEmail(email.trim())) {
+      setSubmitMessage("Please enter a valid email address");
       return;
     }
 
@@ -102,15 +109,32 @@ const Homepage = () => {
     setSubmitMessage("");
 
     try {
-      // Here you would integrate with your actual waitlist API
-      // For now, we'll simulate a successful submission
-      setTimeout(() => {
-        setSubmitMessage("Thanks for joining! We'll be in touch soon.");
-        setEmail("");
-        setIsSubmitting(false);
-      }, 1000);
+      const payload = {
+        email: email.trim(),
+        source: "landing",
+        referrer_url: window.location.href,
+        utm: {
+          utm_source: "landing",
+          utm_campaign: "launch",
+        },
+        marketing_opt_in: true,
+      };
+
+      await joinWaitlist(payload);
+
+      setSubmitMessage("🎉 Thanks for joining! We'll be in touch soon.");
+      setEmail("");
     } catch (error) {
-      setSubmitMessage("Something went wrong. Please try again.");
+      console.error("Waitlist submission error:", error);
+      console.error("Error details:", {
+        message: error.message,
+        stack: error.stack,
+        name: error.name,
+      });
+      setSubmitMessage(
+        `Error: ${error.message || "Something went wrong. Please try again."}`
+      );
+    } finally {
       setIsSubmitting(false);
     }
   };
@@ -970,9 +994,6 @@ const Homepage = () => {
                       : "error-message"
                   }`}
                 >
-                  <span className="message-icon">
-                    {submitMessage.includes("Thanks") ? "🎉" : "⚠️"}
-                  </span>
                   <span>{submitMessage}</span>
                 </div>
               )}
