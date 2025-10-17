@@ -1,13 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./Homepage.css";
 import Logo from "./assets/Logo.png";
-import { joinWaitlist, validateEmail } from "./api/waitlist.js";
 
 const Homepage = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const [email, setEmail] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitMessage, setSubmitMessage] = useState("");
   const [visibleSections, setVisibleSections] = useState(new Set());
   const [showCookieBanner, setShowCookieBanner] = useState(true);
   const [showScrollTop, setShowScrollTop] = useState(false);
@@ -90,54 +86,6 @@ const Homepage = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-
-  const handleWaitlistSubmit = async (e) => {
-    e.preventDefault();
-
-    // Validate required fields
-    if (!email.trim()) {
-      setSubmitMessage("Please enter your email address");
-      return;
-    }
-
-    if (!validateEmail(email.trim())) {
-      setSubmitMessage("Please enter a valid email address");
-      return;
-    }
-
-    setIsSubmitting(true);
-    setSubmitMessage("");
-
-    try {
-      const payload = {
-        email: email.trim(),
-        source: "landing",
-        referrer_url: window.location.href,
-        utm: {
-          utm_source: "landing",
-          utm_campaign: "launch",
-        },
-        marketing_opt_in: true,
-      };
-
-      await joinWaitlist(payload);
-
-      setSubmitMessage("🎉 Thanks for joining! We'll be in touch soon.");
-      setEmail("");
-    } catch (error) {
-      console.error("Waitlist submission error:", error);
-      console.error("Error details:", {
-        message: error.message,
-        stack: error.stack,
-        name: error.name,
-      });
-      setSubmitMessage(
-        `Error: ${error.message || "Something went wrong. Please try again."}`
-      );
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
 
   const scrollToTop = () => {
     window.scrollTo({
@@ -256,15 +204,15 @@ const Homepage = () => {
                 <div className="stat">
                   <span
                     className="stat-number animated-counter"
-                    data-target="80"
+                    data-target="5"
                   >
                     0%
                   </span>
-                  <span className="stat-label">Lower fees</span>
+                  <span className="stat-label">Lower ACH fees</span>
                   <div className="stat-progress">
                     <div
                       className="progress-bar"
-                      style={{ width: "80%" }}
+                      style={{ width: "5%" }}
                     ></div>
                   </div>
                 </div>
@@ -423,7 +371,7 @@ const Homepage = () => {
                   <p className="method-subtitle">Direct bank transfers</p>
                 </div>
                 <div className="method-rate">
-                  <span className="rate-number">0.5%</span>
+                  <span className="rate-number">2.75%</span>
                   <span className="rate-detail">+ 25¢ per transaction</span>
                 </div>
                 <div className="method-content">
@@ -448,7 +396,7 @@ const Homepage = () => {
                     </div>
                   </div>
                   <div className="method-extras">
-                    <div className="savings-badge">Save up to 80%</div>
+                    <div className="savings-badge">Similar rates to credit cards</div>
                   </div>
                 </div>
               </div>
@@ -672,22 +620,22 @@ const Homepage = () => {
                   </div>
                   <div className="breakdown-item">
                     <span className="label">Processing cost to you:</span>
-                    <span className="value">$0.74 (0.5% + 25¢)</span>
+                    <span className="value">$2.95 (2.75% + 25¢)</span>
                   </div>
                   <div className="breakdown-item total">
                     <span className="label">Your net revenue:</span>
-                    <span className="value">$97.26</span>
+                    <span className="value">$95.05</span>
                   </div>
                   <div className="combined-savings">
                     <div className="total-impact">
                       <span className="impact-label">
                         Total Combined Savings:
                       </span>
-                      <span className="impact-value">$2.46</span>
+                      <span className="impact-value">$2.00</span>
                     </div>
                     <div className="impact-breakdown">
                       <span className="business-impact">
-                        Savings for your business: $0.46 vs credit cards
+                        Cost for your business: $1.75 more vs credit cards
                       </span>
                       <span className="customer-impact">
                         Savings for your customers: $2.00
@@ -953,50 +901,19 @@ const Homepage = () => {
                 payment options for customers with Bogle.
               </p>
 
-              <form className="waitlist-form" onSubmit={handleWaitlistSubmit}>
+              <div className="waitlist-form">
                 <div className="form-group">
-                  <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="Enter your email address"
-                    className="email-input"
-                    required
-                    disabled={isSubmitting}
-                  />
-                  <button
-                    type="submit"
-                    className={`waitlist-button ${
-                      isSubmitting ? "loading" : ""
-                    }`}
-                    disabled={isSubmitting}
+                  <button 
+                    className="waitlist-button"
+                    onClick={() => window.open('https://docs.google.com/forms/d/1lyR4TlqHYXFOeT1H2Pbx8_zhfmt5upaZCoNTt0nUCJ8/viewform', '_blank')}
                   >
-                    {isSubmitting ? (
-                      <>
-                        <span className="spinner"></span>
-                        Joining...
-                      </>
-                    ) : (
-                      "Join Waitlist"
-                    )}
+                    Join Waitlist
                   </button>
                 </div>
                 <p className="waitlist-note">
                   Get early access • No spam, ever • Unsubscribe anytime
                 </p>
-              </form>
-
-              {submitMessage && (
-                <div
-                  className={`message ${
-                    submitMessage.includes("Thanks")
-                      ? "success-message"
-                      : "error-message"
-                  }`}
-                >
-                  <span>{submitMessage}</span>
-                </div>
-              )}
+              </div>
 
               <div className="cta-benefits">
                 <span>✓ No setup fees</span>

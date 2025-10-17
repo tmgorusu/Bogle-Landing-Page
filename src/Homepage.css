@@ -1096,9 +1096,12 @@ body {
 
 .discount-comparison {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 2rem;
   margin-bottom: 3rem;
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .comparison-card {
@@ -1138,14 +1141,14 @@ body {
 
 .comparison-header {
   text-align: center;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
 }
 
 .comparison-header h3 {
   font-size: 1.5rem;
   font-weight: 700;
   color: var(--gray-900);
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.75rem;
 }
 
 .discount-badge {
@@ -1154,6 +1157,7 @@ body {
   border-radius: var(--radius-md);
   font-weight: 600;
   font-size: 0.875rem;
+  margin-bottom: 0.5rem;
 }
 
 .discount-badge.ach-discount {
@@ -1172,14 +1176,14 @@ body {
 }
 
 .comparison-breakdown {
-  space-y: 0.75rem;
+  margin-top: 1.5rem;
 }
 
 .breakdown-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.75rem 0;
+  padding: 1rem 0;
   border-bottom: 1px solid var(--gray-100);
 }
 
@@ -1189,10 +1193,11 @@ body {
 
 .breakdown-item.total {
   background: var(--gray-50);
-  margin: 1rem -1rem 0;
-  padding: 1rem 2rem;
+  margin: 1.5rem -2rem 0;
+  padding: 1.25rem 2rem;
   font-weight: 600;
-  border-radius: 0 0 var(--radius-xl) var(--radius-xl);
+  border-radius: var(--radius-lg);
+  border-bottom: none;
 }
 
 .breakdown-item .label {
@@ -1226,9 +1231,9 @@ body {
 
 .combined-savings {
   background: var(--secondary-green);
-  margin: 1rem -1rem 0;
+  margin: 1.5rem -2rem -2rem;
   padding: 1.5rem 2rem;
-  border-radius: var(--radius-lg);
+  border-radius: 0 0 var(--radius-xl) var(--radius-xl);
   border-top: 3px solid var(--primary-green);
 }
 
@@ -1878,6 +1883,14 @@ body {
   margin-bottom: 2rem;
 }
 
+.waitlist-form iframe {
+  max-width: 640px;
+  margin: 0 auto;
+  display: block;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+}
+
 .form-group {
   display: flex;
   gap: 1rem;
@@ -1885,6 +1898,7 @@ body {
   max-width: 500px;
   margin-left: auto;
   margin-right: auto;
+  justify-content: center;
 }
 
 /* Waitlist Section - Fix dark input */
@@ -3248,13 +3262,9 @@ Reduced Whitespace Styles */
 }
 
 /* Tighter spacing for comparison cards */
-.breakdown-item {
-  margin-bottom: 0.75rem; /* Reduced from default 1rem */
-}
-
 .combined-savings {
-  margin-top: 1rem; /* Reduced from default 1.5rem */
-  padding-top: 1rem; /* Reduced from default 1.5rem */
+  margin-top: 1.5rem;
+  padding: 1.5rem 2rem;
 }
 
 /* Reduce hero content spacing */
@@ -3289,6 +3299,10 @@ Reduced Whitespace Styles */
 
 /* Mobile responsive adjustments */
 @media (max-width: 768px) {
+  .waitlist-form iframe {
+    height: 1000px;
+  }
+
   .hero {
     padding: 3rem 0 2rem 0;
   }
