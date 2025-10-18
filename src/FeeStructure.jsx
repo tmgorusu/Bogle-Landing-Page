@@ -36,7 +36,7 @@ const FeeStructure = () => {
   }, [fullText]);
 
   const calculateSavings = (volume, rate) => {
-    const currentFees = (volume * rate / 100) + (volume * 0.003); // 2.9% + 30¢ per transaction
+    const currentFees = (volume * rate / 100) + (volume * 0.003); // 2.75% + 30¢ per transaction
     const bogleFees = (volume * 0.5 / 100) + (volume * 0.0025); // 0.5% + 25¢ per transaction
     const monthlySavings = currentFees - bogleFees;
     const annualSavings = monthlySavings * 12;
@@ -130,7 +130,7 @@ const FeeStructure = () => {
                         </div>
                       </div>
                     </td>
-                    <td className="fee-cell primary">2.9%</td>
+                    <td className="fee-cell primary">2.75%</td>
                     <td className="fee-cell">$0.30</td>
                     <td className="fee-cell">$0</td>
                     <td className="fee-cell">$0</td>

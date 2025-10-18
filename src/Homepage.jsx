@@ -333,7 +333,7 @@ const Homepage = () => {
                   <p className="method-subtitle">Traditional processing</p>
                 </div>
                 <div className="method-rate">
-                  <span className="rate-number">2.9%</span>
+                  <span className="rate-number">2.75%</span>
                   <span className="rate-detail">+ 30¢ per transaction</span>
                 </div>
                 <div className="method-content">
@@ -371,7 +371,7 @@ const Homepage = () => {
                   <p className="method-subtitle">Direct bank transfers</p>
                 </div>
                 <div className="method-rate">
-                  <span className="rate-number">2.75%</span>
+                  <span className="rate-number">0.5%</span>
                   <span className="rate-detail">+ 25¢ per transaction</span>
                 </div>
                 <div className="method-content">
@@ -575,11 +575,11 @@ const Homepage = () => {
                   </div>
                   <div className="breakdown-item">
                     <span className="label">Processing cost to you:</span>
-                    <span className="value">$3.20 (2.9% + 30¢)</span>
+                    <span className="value">$3.05 (2.75% + 30¢)</span>
                   </div>
                   <div className="breakdown-item total">
                     <span className="label">Your net revenue:</span>
-                    <span className="value">$96.80</span>
+                    <span className="value">$96.95</span>
                   </div>
                   <div className="combined-savings">
                     <div className="total-impact">
