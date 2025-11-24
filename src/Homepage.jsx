@@ -155,9 +155,7 @@ const Homepage = () => {
                 <span className="hero-title-accent"> Modern Businesses</span>
               </h1>
               <p className={`hero-subtitle ${isVisible ? "animate-in" : ""}`}>
-                Bogle is rebuilding payments by giving small businesses the same pricing, speed, and reliability usually reserved for large enterprises. We are rebuilding payments from the ground up with transparent costs, next-generation rails, and support that's human.
-                <br /><br />
-                We give EVERY merchant the tools they need to accept money effortlessly.
+                Bogle is rebuilding payments bringing small businesses the same pricing, speed, and reliability once reserved for large enterprises. With transparent costs, next-generation payment rails, and real human support, we make accepting money effortless.
               </p>
               <div className={`hero-actions ${isVisible ? "animate-in" : ""}`}>
                 <a
